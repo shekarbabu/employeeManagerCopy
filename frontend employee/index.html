@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+    <h1>ENTER THE EMPLOYEE DETAILS</h1>
+    <form id="dataForm" action="#" onsubmit="submitData(event)">
+        <br> Firstname <input type="text" name="fname" id="fname" placeholder="Enter Firstname" /> <small id="fnamemessage" ></small>
+        <br> Email <input type="text" name="emailid" id="email" placeholder="Enter Email"/> <small id="emailmessage" ></small>
+        <br> DOB <input type="text" name="dob" id="dob" placeholder="enter the dob"/>
+        <br> AGE <input type="text" name="age" id="age" placeholder="Enter age"/> <small id="agemessage" ></small>
+        <br> Salary <input type="text" name="salary" id="salary" placeholder="Enter salary."/> <small id="salarymessage" ></small>
+        <br>
+        <input type="submit" value="Submit Data"> 
+        <br>
+        <ul id="summaryerrors">
+        </ul>
+    </form>
+    <script>
+  
+        
+        submitData = (event) => {
+            event.preventDefault(); // to prevent page refreshing
+            let dataFromForm = document.getElementById('dataForm');
+            let dataobject = Object.fromEntries(new FormData(dataFromForm));
+            console.log(dataobject);
+            validatedata(dataobject);           
+        }
+      
+        function hideshowhobies(){
+            if( document.getElementById('hobiescheckbox').checked==true){ // if checkbox checked : display='block';
+                document.getElementById('hobiesdiv').style.display='block';
+            }
+            else{ // if checkbox unchecked : display='none';
+                document.getElementById('hobiesdiv').style.display='none';
+            }
+        }
+        
+​
+        function validatedata(dataobject){
+            
+            let errormessages = [];
+           
+            if(dataobject.fname=='' ){
+                document.getElementById('unamemessage').innerHTML="firstname must be entered";
+                errormessages.push('Firstname must be entered');
+            }
+            else{
+                document.getElementById('fnamemessage').innerHTML="";
+            }
+            
+            if(dataobject.email=='' || dataobject.email==''){ 
+                document.getElementById('emailmessage').innerHTML="email must be entered";
+                errormessages.push('email must be entered');
+            }
+            // else if(dataobject.email!=dataobject.email) { 
+            //     document.getElementById('emailmessage').innerHTML="email must match";
+            //     errormessages.push('email must match');
+            // }
+            else{
+                document.getElementById('emailmessage').innerHTML="";
+            }
+​
+            if(dataobject.dob=='' ){
+                document.getElementById('dobmessage').innerHTML="dob must be entered";
+                errormessages.push('dob must be entered');
+            }
+            else{
+                document.getElementById('dobmessage').innerHTML="";
+            }
+​
+            if(dataobject.age=='' ){
+                document.getElementById('age').innerHTML="age must be entered";
+                errormessages.push('age must be entered');
+            }
+            else{
+                document.getElementById('agemessage').innerHTML="";
+            }
+
+            
+            if(dataobject.salary=='' ){
+                document.getElementById('salary').innerHTML="salary must be entered";
+                errormessages.push('salary must be entered');
+            }
+            else{
+                document.getElementById('salarymessage').innerHTML="";
+            }
+​
+        
+       
+          
+​
+            let content='';
+            for(i=0;i<errormessages.length;i++){
+                content = content + `<li>${errormessages[i]}</li>`;
+            }
+            /*
+                <li>..0th.....</li>
+                <li>..1st....</li>  
+            */
+           document.getElementById('summaryerrors').innerHTML=content;
+​
+           
+​
+​
+​
+​
+​
+​
+        }
+    </script>
+​
+</body>
+</html>
